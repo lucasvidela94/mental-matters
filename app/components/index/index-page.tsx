@@ -18,7 +18,7 @@ function IndexPage() {
           onClick={() => {
             navigate("/take-a-breath");
           }}
-          className="w-64 h-14 m-2 text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg bg-white text-purple-600 hover:bg-purple-100"
+          className="w-64 h-14 m-4 text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg bg-white text-blue-600 hover:bg-blue-100"
         >
           Tengo una situación
         </Button>
@@ -26,7 +26,7 @@ function IndexPage() {
           onClick={() => {
             navigate("/mind-vault");
           }}
-          className="w-64 h-14 text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg bg-transparent border-2 border-white hover:bg-white hover:text-purple-600"
+          className="w-64 h-14 text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg bg-transparent border-2 border-white hover:bg-white hover:text-blue-600"
         >
           Quiero ver mi registro
         </Button>

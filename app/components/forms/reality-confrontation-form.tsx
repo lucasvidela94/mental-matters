@@ -67,13 +67,12 @@ const RealityConfrontationForm = ({
               situación te desafía y considerá los hechos tal como son.
             </p>
           </div>
-
           <Button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300 flex items-center justify-center space-x-2"
           >
             <SendIcon size={18} className="mr-2" />
-            Enviar
+            <span>Enviar</span>
           </Button>
         </form>
       </motion.div>

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -30,7 +32,7 @@ const stageLabels = {
   stage5_response: "Resultado",
 };
 
-export default function MindVault() {
+export default function MindVaultContainer() {
   const [mindflowData, setMindflowData] = useState<MindflowData[]>([]);
 
   useEffect(() => {
@@ -53,7 +55,7 @@ export default function MindVault() {
         transition={{ duration: 0.5 }}
         className="w-full max-w-3xl"
       >
-        <Card className="bg-white shadow-xl border-0">
+        <Card className="bg-white shadow-xl border-0 overflow-hidden">
           <CardHeader className="text-center border-b border-gray-200 pb-6">
             <div className="flex items-center justify-center space-x-2 mb-2">
               <BrainIcon size={40} className="text-blue-600" />
@@ -66,78 +68,83 @@ export default function MindVault() {
               Registro de situaciones
             </h2>
           </CardHeader>
-          <CardContent className="p-0">
-            <ScrollArea className="h-[calc(100vh-250px)]">
-              <div className="p-6 space-y-6">
-                {mindflowData.length > 0 ? (
-                  mindflowData.map((item) => (
-                    <Card
-                      key={item.id}
-                      className="bg-gray-50 hover:bg-gray-100 transition-colors duration-200 border border-gray-200"
-                    >
-                      <CardContent className="p-4">
-                        <div className="flex items-center justify-between text-gray-600 mb-4">
-                          <div className="flex items-center">
-                            <CalendarIcon
-                              size={16}
-                              className="mr-2 text-blue-600"
-                            />
-                            <span>
-                              {new Date(item.date).toLocaleDateString("es-ES", {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                              })}
-                            </span>
+          <div className="h-[calc(100vh-250px)] overflow-hidden">
+            <ScrollArea className="h-full">
+              <CardContent className="p-6">
+                <div className="space-y-6">
+                  {mindflowData.length > 0 ? (
+                    mindflowData.map((item) => (
+                      <Card
+                        key={item.id}
+                        className="bg-gray-50 hover:bg-gray-100 transition-colors duration-200 border border-gray-200"
+                      >
+                        <CardContent className="p-4">
+                          <div className="flex items-center justify-between text-gray-600 mb-4">
+                            <div className="flex items-center">
+                              <CalendarIcon
+                                size={16}
+                                className="mr-2 text-blue-600"
+                              />
+                              <span>
+                                {new Date(item.date).toLocaleDateString(
+                                  "es-ES",
+                                  {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                  }
+                                )}
+                              </span>
+                            </div>
+                            <Badge
+                              variant="secondary"
+                              className="text-xs bg-blue-100 text-blue-800 p-2"
+                            >
+                              {Object.values(item).filter(Boolean).length - 2}{" "}
+                              etapas
+                            </Badge>
                           </div>
-                          <Badge
-                            variant="secondary"
-                            className="text-xs bg-blue-100 text-blue-800"
-                          >
-                            {Object.values(item).filter(Boolean).length - 2}{" "}
-                            etapas
-                          </Badge>
-                        </div>
-                        <div className="space-y-2">
-                          {Object.entries(item).map(([key, value]) => {
-                            if (key !== "id" && key !== "date" && value) {
-                              return (
-                                <div
-                                  key={key}
-                                  className="flex items-start text-gray-700"
-                                >
-                                  <ChevronRightIcon
-                                    size={16}
-                                    className="mr-2 text-blue-600 flex-shrink-0 mt-1"
-                                  />
-                                  <div>
-                                    <span className="font-medium">
-                                      {
-                                        stageLabels[
-                                          key as keyof typeof stageLabels
-                                        ]
-                                      }
-                                      :
-                                    </span>
-                                    <span className="ml-1">{value}</span>
+                          <div className="space-y-2">
+                            {Object.entries(item).map(([key, value]) => {
+                              if (key !== "id" && key !== "date" && value) {
+                                return (
+                                  <div
+                                    key={key}
+                                    className="flex items-start text-gray-700"
+                                  >
+                                    <ChevronRightIcon
+                                      size={16}
+                                      className="mr-2 text-blue-600 flex-shrink-0 mt-1"
+                                    />
+                                    <div>
+                                      <span className="font-medium">
+                                        {
+                                          stageLabels[
+                                            key as keyof typeof stageLabels
+                                          ]
+                                        }
+                                        :
+                                      </span>
+                                      <span className="ml-1">{value}</span>
+                                    </div>
                                   </div>
-                                </div>
-                              );
-                            }
-                            return null;
-                          })}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))
-                ) : (
-                  <div className="text-center text-gray-600 py-8">
-                    No hay situaciones registradas aún.
-                  </div>
-                )}
-              </div>
+                                );
+                              }
+                              return null;
+                            })}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))
+                  ) : (
+                    <div className="text-center text-gray-600 py-8">
+                      No hay situaciones registradas aún.
+                    </div>
+                  )}
+                </div>
+              </CardContent>
             </ScrollArea>
-          </CardContent>
+          </div>
         </Card>
       </motion.div>
     </div>
